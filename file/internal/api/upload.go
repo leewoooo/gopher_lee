@@ -47,14 +47,14 @@ func (u *UploadImpl) Single(w http.ResponseWriter, r *http.Request) {
 		u.logger.Errorf("upload file could not over 2Mib error:%v", err)
 
 		w.WriteHeader(http.StatusBadRequest)
-		resp.Error, resp.Names = "could not get FormFile", nil
+		resp.Error, resp.Names = "upload file could not over 2Mib", nil
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
 
 	// get formfile error
 	if err != nil {
-		u.logger.Errorf("could not ger formFile error:%v", err)
+		u.logger.Errorf("could not get formFile error:%v", err)
 
 		w.WriteHeader(http.StatusBadRequest)
 		resp.Error, resp.Names = "could not get FormFile", nil
@@ -67,6 +67,9 @@ func (u *UploadImpl) Single(w http.ResponseWriter, r *http.Request) {
 	// extarct file info
 	oName := filepath.Base(header.Filename)
 	size := header.Size
+
+	// formfile을 할 때 얻어온 Header안에 Conternt type으로 해당 File의 MIME를 알아낼 수 있다.
+	// MIME := header.Header.get("Content-Type")
 
 	// prevent coverd file
 	// save originName and newName to repository and use it
