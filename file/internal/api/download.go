@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 const downloadFilePath = "./tmp"
@@ -28,7 +29,14 @@ func NewDownload(logger log.Logger) Download {
 // Single download single file handler
 func (d *DownloadImpl) Single(w http.ResponseWriter, r *http.Request) {
 	// TODO: get file path or file name where request
-	filePath := filepath.Join(downloadFilePath, "example.jpg")
+
+	// get file Name where reqeust URI
+	fileName := strings.TrimPrefix(r.URL.RequestURI(), "/download/")
+	if fileName == "" {
+		fileName = "example.jpg"
+	}
+
+	filePath := filepath.Join(downloadFilePath, fileName)
 
 	resp := &dto.DownloadResponse{}
 	// exist check
