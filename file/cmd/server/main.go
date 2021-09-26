@@ -24,7 +24,7 @@ func main() {
 	// mux
 	mux := http.NewServeMux()
 	mux.HandleFunc("/upload", uploadHandler.Single)
-	mux.HandleFunc("/download", downloadHandler.Single)
+	mux.HandleFunc("/download/", downloadHandler.Single)
 
 	// fileserver
 	fs := http.FileServer(http.Dir("./file/internal/web/static"))
