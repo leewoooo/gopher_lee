@@ -21,6 +21,7 @@ func TestOverFlow(t *testing.T) {
 
 func TestUnderFlow(t *testing.T) {
 	// var a uint8 = 0 - 1
+	// cannot use 0 - 1 (untyped int constant -1) as uint8 value in variable declaration (overflows)
 
 	var b uint8 = 0
 	b = b - 1
