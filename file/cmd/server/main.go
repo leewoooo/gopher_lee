@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"errors"
-	api "gopher_lee/file/internal/api"
+	"gopher_lee/file/internal/resource"
 	"net/http"
 	"os"
 	"os/signal"
@@ -18,8 +18,8 @@ func main() {
 	logger := logrus.NewEntry(logrus.New())
 
 	// create handler instance
-	uploadHandler := api.NewUpload(logger)
-	downloadHandler := api.NewDownload(logger)
+	uploadHandler := resource.NewUpload(logger)
+	downloadHandler := resource.NewDownload(logger)
 
 	// mux
 	mux := http.NewServeMux()

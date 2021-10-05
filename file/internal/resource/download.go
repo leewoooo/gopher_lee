@@ -1,4 +1,4 @@
-package api
+package resource
 
 import (
 	"gopher_lee/file/internal/dto"
