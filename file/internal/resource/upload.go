@@ -6,7 +6,6 @@ import (
 	"gopher_lee/file/internal/dto"
 	"gopher_lee/log"
 	"io"
-	"mime/multipart"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -33,31 +32,27 @@ func NewUpload(logger log.Logger) Upload {
 
 // Single handling to upload multipart file
 func (u *UploadImpl) Single(w http.ResponseWriter, r *http.Request) {
-	// set Max Size 2Mib
-	r.Body = http.MaxBytesReader(w, r.Body, 2<<20)
-	defer r.Body.Close()
-
 	// create response
 	resp := &dto.UploadResponse{}
+
 	// get from file
 	uFile, header, err := r.FormFile("upload_file")
+	// error check
+	if err != nil {
+		u.logger.Errorf("could not get form file error:%v", err)
 
-	// loage file check
-	if err != nil && err == multipart.ErrMessageTooLarge {
+		w.WriteHeader(http.StatusBadRequest)
+		resp.Error, resp.Names = "server could not get form file", nil
+		json.NewEncoder(w).Encode(resp)
+
+		return
+	}
+	// size check
+	if header.Size > 2<<20 {
 		u.logger.Errorf("upload file could not over 2Mib error:%v", err)
 
 		w.WriteHeader(http.StatusBadRequest)
 		resp.Error, resp.Names = "upload file could not over 2Mib", nil
-		json.NewEncoder(w).Encode(resp)
-		return
-	}
-
-	// get formfile error
-	if err != nil {
-		u.logger.Errorf("could not get formFile error:%v", err)
-
-		w.WriteHeader(http.StatusBadRequest)
-		resp.Error, resp.Names = "could not get FormFile", nil
 		json.NewEncoder(w).Encode(resp)
 
 		return
@@ -74,7 +69,7 @@ func (u *UploadImpl) Single(w http.ResponseWriter, r *http.Request) {
 	// prevent coverd file
 	// save originName and newName to repository and use it
 	nName := uuid.NewString() + filepath.Ext(oName)
-	u.logger.Infof("file upload request with fields fileName:%s, size:%d byte", oName, size)
+	u.logger.Infof("file upload request with fields fileName:%s, size:%dbyte", oName, size)
 
 	// save file
 	oFile, err := os.Create(fmt.Sprintf("%s/%s", uploadFilePath, nName))
