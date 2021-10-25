@@ -46,7 +46,7 @@ Java와 같은 경우 class가 interface를 구현할 때 implement keyword를 �
 
 하지만!
 
-go에서는 implement와 같이 `keyword를 명시적으로 사용하지 않습니다.` interface가 가지고 있는 method들을 `리시버를 이용해 객체에 종속시켜` 해당 interface를 구현할 수 있습니다.
+go에서는 implement와 같이 `keyword를 명시적으로 사용하지 않습니다.` interface가 가지고 있는 method들을 `리시버를 이용해 객체에 종속시켜` 해당 interface를 구현할 수 있습니다. -> duck typing
 
 <br>
 
@@ -54,6 +54,38 @@ go에서는 implement와 같이 `keyword를 명시적으로 사용하지 않습�
 
 >만약 어떤 새가 오리처럼 걷고, 오리처럼 헤엄치고, 오리처럼 꽥꽥거린다면 나는 그 새를 오리라고 부를 것이다. (덕 테스트)
 
+go에서는 duck typing을 지원합니다 duck typing을 살펴보기 전에 정적, 동적 언어의 특징과 차이점을 간단하게 알아보기를 원합니다.
+
+<br>
+
+### Static, Dynamic Language
+
+정적언어의 특징은 다음과 같습니다.
+
+- 변수 또는 함수의 type을 미리 지정해야 합니다.
+- 컴파일 시점에 type Check가 가능합니다.
+
+동적 언어의 특징은 다음과 같습니다.
+
+- 변수 또는 함수의 type을 지정하지 않고 사용할 수 있습니다.
+- type Check는 runtime 시점에서만 알 수 있습니다.
+- Type지정이 안되어 있는 소스 분석이 어렵습니다.
+
+두 언어의 가장 큰 차이점은 `Type정보를 지정해야 하나? 아니냐?`로 볼 수 있습니다.
+
+go언어는 `정적 type의 언어입니다.` 하지만 `동적 언어의 특성 또한 수용하였습니다.`
+
+즉 컴파일러의 보장을 받으면서 동적 언어의 장점을 사용할 수 있다는 것 입니다.(동적 언어의 장점으로는 문법적인 간결함과 잦은 기능변경이 필요한 곳에서 변경이 용이하다는 점입니다.)
+
+이를 가능하게 해주는 것이 바로 `duck typing` 입니다.(go는 정적 type의 언어이다 보니 해당 type이 interface를 구현했는지 complie time에 check를 하게 됩니다.)
+
+<br>
+
+### duck typing을 왜 사용할까?
+
+결론부터 이야기 하자면 `사용자 중심의 code작성이 가능해지기 때문입니다.`
+
+interface의 구현 여부를 type선언시 하지 않고 interface가 사용 될 때 결정하기 때문에 서비스 제공자는 `구체화 된 객체를 제공하고` 사용자가 `필요에 따라 interface를 정의하여 사용할 수 있기 때문입니다.` 
 
 
 
