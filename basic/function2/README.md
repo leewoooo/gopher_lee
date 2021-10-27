@@ -18,7 +18,6 @@ func example(a int, b int, c ...int) { // error 발생
 
 // can only use ... with final parameter in list
 func example2(a int, b ...int, c int) { // error 발생
-
 }
 ```
 
@@ -208,7 +207,7 @@ golang은 기본적으로 call by value입니다.
 
 ## REFERENCE
 
-
+https://www.youtube.com/watch?v=qRyHepiTEs8&t=2419s
 
 
 
