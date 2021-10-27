@@ -204,6 +204,11 @@ golang은 기본적으로 call by value입니다.
 
 즉 함수 리터럴안에서 외부의 지역변수를 사용할 때는 `값이 복사가 되는 것이 아니라 reference가 복사되기 때문입니다. (go에서는 reference라는 개념보다는 pointer)`
 
+<br>
+
+## REFERENCE
+
+
 
 
 
