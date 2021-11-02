@@ -1,31 +1,7 @@
-Data Structure
+list
 ===
 
-## 자료구조란?
-
-사전적인 의미로는 자료(Data)의 집합을 의미하며, 각 원소들이 논리적으로 정의된 규칙에 의해 나열되며 자로에 대한 처리를 효율적으로 수행할 수 있도록 자료를 구분하여 표현한 것 입니다.
-
-즉 Data들을 어떠한 형태로 저장할까에 대한 이야기 입니다.
-
-<br>
-
-### 자료구조의 목적은?
-
-자료를 `더 효율적으로 저장하고, 관리하기 위해 사용되며` 잘 선택된 자료구조는 실행 시간을 단축시켜 주거나 메모리 용량의 절약을 이끌어 낼 수 있습니다.
-
-<br>
-
-### 선택 기준
-
-1. 자료의 처리 시간
-2. 자료의 크기
-3. 자료의 활용 빈도
-4. 자료의 갱신 정도
-5. 프로그램의 용이성
-
-<br>
-
-### golang에서 container package를 이용해보자.
+## golang에서 container package에서 list를 제공한다?
 
 golang standard library에서는 3개의 자료구조를 기본적으로 제공해줍니다. (이 markdown에서는 list만 다루겠습니다.)
 
@@ -35,7 +11,7 @@ golang standard library에서는 3개의 자료구조를 기본적으로 제공�
 
 <br>
 
-## list (linked list)
+## list란? (linked list)
 
 배열과 함께 기본적인 `선형` 자료구조 중 하나입니다. [list api문서](https://pkg.go.dev/container/list@go1.17.2)에는 list를 이렇게 소개하고 있습니다.
 
