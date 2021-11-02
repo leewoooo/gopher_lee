@@ -85,6 +85,24 @@ func (s *Stack) Pop() interface{} {
 	return nil
 }
 
+type Stack2 struct {
+	l []interface{}
+}
+
+func NewStack2(l []interface{}) *Stack2 {
+	return &Stack2{l: l}
+}
+
+func (s *Stack2) Push(val interface{}) {
+	_ = append(s.l, val)
+}
+
+func (s *Stack2) Pop() interface{} {
+	last := s.l[len(s.l)-1]
+	s.l = s.l[:len(s.l)-1]
+	return last
+}
+
 func TestStack(t *testing.T) {
 	stack := NewStack(list.New())
 
