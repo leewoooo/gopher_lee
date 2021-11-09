@@ -1,4 +1,4 @@
 goroutine
 ===
 
-will monday
+## 고루틴을 알기 전에 쓰레드를 살펴보자.
