@@ -22,7 +22,7 @@ func DoSomething(ctx context.Context, arg Arg) error {
 
 여기서 주의해야 할 점은 Context는 struct로 가지고 있으면 안됩니다.
 
-위 예제 코드처럼 항상 명시적으로 전달을 해야합니다. `nil`을 Context로 전달이 허용되도 절대 `nil`을 전달하면 안된다. 어떠한 Context를 전달해야 할지 모르겠다면 `context.TODO`를 전달하면 된다.
+위 예제 코드처럼 항상 명시적으로 전달을 해야합니다. `nil`을 Context로 전달이 허용되도 절대 `nil`을 전달하면 안된다. 어떠한 Context를 전달해야 할지 모르겠다면 `context.TODO`를 전달하면 됩니다.
 >Do not pass a nil Context, even if a function permits it. Pass context.TODO if you are unsure about which Context to use.
 
 <br>
@@ -156,7 +156,7 @@ Context 사용에 있어서 이 cancel context 부분을 이해하는 것이 중
 
 그 때, 이 고루틴 종료를 관리해줄 수 있는 것이 바로 cancel 가능한 context입니다.
 
-예를 들어보자먄
+예를 들어보자면
 
 유저의 `데이터를 가져오는 API와 이를 처리하는 Go 서버`가 있다고 생각해보았을 때 유저가 데이터를 달라고 `서버에 request를 보내면 서버에서 request를 처리하기 위해 필요한 정보들을 DB에서 가져오고`, 그 데이터를 적절하게 `가공하여 유저에게 다시 response를 보냅니다.`
 
