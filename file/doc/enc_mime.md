@@ -1,2 +1,0 @@
-encType, MIME
-===
