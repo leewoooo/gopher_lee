@@ -128,7 +128,7 @@ func (d *decodeState) convertNumber(s string) (interface{}, error) {
 	//...
 ```
 
-이렇게 return받게 된 값을 사용ㅇ하는 것은 아래의 예제코드와 같이 사용할 수 있습니다. 해당하는 값을 `json.Number`로 명시한 후 `Int64` API를 호출하여 `int64` 타입으로 사용할 수 있습니다.
+이렇게 return받게 된 값을 사용하는 것은 아래의 예제코드와 같이 사용할 수 있습니다. 해당하는 값을 `json.Number`로 명시한 후 `Int64` API를 호출하여 `int64` 타입으로 사용할 수 있습니다.
 ```go
 //...
 marshaled, err := json.Marshal(given)
