@@ -133,3 +133,43 @@ alice@example
 
 ## 결국은 정규식??
 
+위의 mail package를 이용하여 email 형식의 문자열을 validation 할 수도 있지만!
+
+**로그인/가입 양식**유효성 검사에서 이를 사용하면 많은 사람들이 부분적 또는 잘못된 이메일 주소를 입력하여 프로덕션 에 잘못된 레코드 가 잔뜩 생성 될 수도 있습니다.
+
+그렇기 때문에 결국 해당 로직을 구현할 때 정규식을 사용하였습니다. go에서 정규식을 사용할 때는 `regexp` 패키지를 사용합니다. 예제코드는 다음과 같습니다. 
+
+```go
+emailreg := `^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`
+
+ok, err := regexp.MatchString(emailreg, <정규식에 대입하여 검증할 문자열>)
+
+//ex
+given := []string{
+    "Alice <alice@example.com>",
+    "<alice@example.com>",
+    "alice@example.com",
+    "alice@example",
+    "bad-example",
+    "",
+    "@",
+}
+
+for _, v := range given {
+    ok, err := regexp.MatchString(emailreg, v)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    log.Printf("%s Match result: %v", v, ok)
+}
+
+// output
+2021/11/30 21:11:26 Alice <alice@example.com> Match result: false
+2021/11/30 21:11:26 <alice@example.com> Match result: false
+2021/11/30 21:11:26 alice@example.com Match result: true
+2021/11/30 21:11:26 alice@example Match result: false
+2021/11/30 21:11:26 bad-example Match result: false
+2021/11/30 21:11:26  Match result: false
+2021/11/30 21:11:26 @ Match result: false
+```
